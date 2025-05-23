@@ -1,0 +1,19 @@
+# Environnement Python
+env/
+__pycache__/
+
+# Node.js
+frontend/node_modules/
+frontend/build/
+
+# Fichiers système
+.DS_Store
+
+# Django
+*.sqlite3
+*.pyc
+*.log
+
+# VS Code
+.vscode/
+
