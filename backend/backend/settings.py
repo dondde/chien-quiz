@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x^#owh5t4d%mmanzltz)jb9cc8($eo1$_)^eg5*9r@)lgi7kdy'
+SECRET_KEY = 'django-insecure--i%a$1d!31uj!h15jvlg*lry8da(2*sf5e5k9dvs4)d2mb%*)4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,11 +40,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    'drf_yasg',
+    'djoser',
+
     'quiz',
 ]
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,12 +128,23 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'quiz.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    ]
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SERIALIZERS': {
+        'user_create': 'quiz.serializers.UserCreateSerializer',
+        'user': 'quiz.serializers.UserSerializer',
+    },
+    'PERMISSIONS': {
+        'user_create': ['rest_framework.permissions.AllowAny'],
+        'user': ['rest_framework.permissions.IsAuthenticated'],
+    }
 }
