@@ -12,9 +12,12 @@ class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
         model = User
         fields = ('id', 'email', 'username', 'password')
+        ref_name = 'CustomUserCreateSerializer'
+
 
 class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):
         model = User
         fields = ('id', 'email', 'username')
+        ref_name = 'CustomUserSerializer'
 
